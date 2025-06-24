@@ -528,7 +528,7 @@ class Game:
 
         self.music_on = True
         self.music_button = Button(SCREEN_WIDTH - 240, 20, 110, 40, "Выключить музыку")
-        pygame.mixer.music.load("audio/main_theme.mp3")
+        pygame.mixer.music.load("resources/audio/main_theme.mp3")
         pygame.mixer.music.play(-1)
 
         self.last_state = None
@@ -570,7 +570,7 @@ class Game:
                 for item in self.shop_items:
                     item.check_hover(mouse_pos)
                     if item.is_clicked(mouse_pos, event) and self.money >= item.cost:
-                        buying_sound = pygame.mixer.Sound("audio/buying.mp3")
+                        buying_sound = pygame.mixer.Sound("resources/audio/buying.mp3")
                         buying_sound.play()
                         if item.effect == "immunity":
                             self.max_immunity += 10
@@ -607,7 +607,7 @@ class Game:
                                 25 if self.selected_unit == "В-лимфоцит" else \
                                     40 if self.selected_unit == "Т-киллер" else 50
                         if self.immunity >= unit_cost:
-                            attack_sound = pygame.mixer.Sound("audio/attack.mp3")
+                            attack_sound = pygame.mixer.Sound("resources/audio/attack.mp3")
                             attack_sound.play()
                             self.units.add(Unit(mouse_pos[0], mouse_pos[1], self.selected_unit))
                             self.immunity -= unit_cost
@@ -703,7 +703,7 @@ class Game:
             for unit in self.units:
                 unit.update(self.enemies, self.enemy_base)
                 if unit.health <= 0:
-                    puff_sound = pygame.mixer.Sound("audio/puff.mp3")
+                    puff_sound = pygame.mixer.Sound("resources/audio/puff.mp3")
                     puff_sound.play()
                     unit.kill()
 
@@ -711,7 +711,7 @@ class Game:
             for enemy in self.enemies:
                 enemy.update(self.player_base, self.units)
                 if enemy.health <= 0:
-                    puff_sound = pygame.mixer.Sound("audio/puff.mp3")
+                    puff_sound = pygame.mixer.Sound("resources/audio/puff.mp3")
                     puff_sound.play()
                     self.immunity = min(self.max_immunity, self.immunity + 3)
                     self.money += enemy.reward
@@ -727,10 +727,10 @@ class Game:
         # Воспроизведение победы/поражения только при переходе
         if self.state != self.last_state:
             if self.state == VICTORY:
-                victory_sound = pygame.mixer.Sound("audio/victory.mp3")
+                victory_sound = pygame.mixer.Sound("resources/audio/victory.mp3")
                 victory_sound.play()
             elif self.state == GAME_OVER:
-                defeat_sound = pygame.mixer.Sound("audio/defeat.mp3")
+                defeat_sound = pygame.mixer.Sound("resources/audio/defeat.mp3")
                 defeat_sound.play()
             self.last_state = self.state
 
