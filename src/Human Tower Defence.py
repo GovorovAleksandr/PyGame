@@ -114,7 +114,7 @@ class Unit(pygame.sprite.Sprite):
             # Анимация
             if self.anim_data is not None:
                 self.image = self.get_anim_frame('run', 0)
-            # --- Маска для pixel-perfect хитбокса ---
+            # Маска для pixel-perfect хитбокса
             self.mask = pygame.mask.from_surface(self.image)
         elif unit_type == "Макрофаг":
             self.color = GRAY
@@ -237,7 +237,7 @@ class Unit(pygame.sprite.Sprite):
                 # Движение к базе врага
                 if self.rect.centerx < SCREEN_WIDTH - 100:
                     self.rect.x += int(self.speed)
-                # --- Атака базы врага, если нет врагов рядом ---
+                # Атака базы врага, если нет врагов рядом
                 if enemy_base and self.rect.colliderect(enemy_base.rect):
                     if self.attack_cooldown <= 0:
                         self.state = 'punch'
@@ -258,7 +258,7 @@ class Unit(pygame.sprite.Sprite):
                 # Движение к базе врага
                 if self.rect.centerx < SCREEN_WIDTH - 100:
                     self.rect.x += int(self.speed)
-                # --- Атака базы врага, если нет врагов рядом ---
+                # Атака базы врага, если нет врагов рядом
                 if enemy_base and self.rect.colliderect(enemy_base.rect):
                     if self.attack_cooldown <= 0:
                         self.state = 'punch'
@@ -379,7 +379,7 @@ class Enemy(pygame.sprite.Sprite):
             self.speed = 1.2
             self.attack_power = int(4 * 1.25 * 2)
             self.reward = 200
-            # --- Анимация barbarian ---
+            # Анимация barbarian
             if self.anims:
                 self.state = 'run'
                 self.anim_frame = 0
@@ -1259,9 +1259,7 @@ class Game:
         if self.state != SHOP:
             self.music_button.draw(screen)
             self.sounds_button.draw(screen)
-
-        # --- Ползунки и подписи громкости ---
-        if self.state != SHOP:
+            
             # --- Ползунок громкости музыки ---
             pygame.draw.rect(screen, (180,180,180), self.music_slider_rect, border_radius=5)
             handle_x = int(self.music_slider_rect.x + self.music_volume * self.music_slider_rect.width)
